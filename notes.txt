@@ -1,0 +1,267 @@
+dependências são bibliotecas de terceiros
+
+terminal -> server:
+npm install express
+    o express é um microframework para lidar com rotas
+
+
+Quando usa TS na aplicação, as bibliotecas precisam vir com o código e a definição de tipos da biblioteca. Essa definição traz para o editor a infromação de todas as opções (hunções, retornos, parâmetros...) do express
+
+instalar -> terminal -> server:
+npm install @types/express -D
+    o -D significa que eu quero essa dependência instalada somente no meu ambiente de desenvolvimento
+
+instalar typescript:
+terminal -> server:
+npm install typescript -D
+
+node só entende js
+para poder executar comandos/scripts para ts:
+terminal -> server:
+npm install ts-node -D
+
+
+toda vez que criamos uma aplicação TS, precisamos ter um arquivo de configuração de TS (não vai ser necessario mexer mais nesse arquivo)
+terminal -> server:
+npx tsc --init
+
+
+npx serve para executar um pacote instalado
+no caso, executar a aplicação
+npx ts-node src/server.ts
+
+qualquer atualização no código, ctrl+c e rodar comando para executar a aplicação de novo
+
+para não precisar ficar fazendo esse processo, instalar este pacote que sempre que tiver uma atualização no código, ele vai restartar o servidor automaticamente:
+terminal -> server:
+npm install ts-node-dev -D
+
+executar este comando para o servidor restartar automaticamente
+npx ts-node-dev src/server.ts
+
+como o comando é muito grande, acessar o arquivo package.json, achar a seção scripts, apagar o script test, criar um script com um nome qualquer, no caso, dev
+"dev": "ts-node-dev src/server.ts"
+agora, para iniciar o servidor/aplicação:
+
+***EXECUTAR SERVIDOR
+terminal -> server:
+npm run dev
+
+
+REACT
+criar a aplicação
+terminal -> pasta raiz:
+npx create-react-app web --template=typescript
+    web é o nome da nossa aplicação
+
+
+***EXECUTAR APLICAÇÃO WEB:
+terminal -> web:
+npm start
+
+
+//Rota: endereço completo da requisição
+//recurso: qual entidade estamos acessando do sistema
+
+//Principais métodos http para requisições:
+//GET: buscar uma ou mais informações do back-end
+//POST: criar uma nova informação no back-end
+//PUT: atualizar uma informação existente no back-end
+//DELETE
+
+//POST http://localhost:3333/users = criar um usuário
+//GET http://localhost:3333/users = listar usuários
+//GET http://localhost:3333/users/5 = buscar dados do usuário com ID 5
+
+//Request Param: parâmetros que vem na própria rota que identificam um recurso
+//Query Param: parâmetros que vem na própria rota, geralmente opcionais para filtros, paginação
+//Request Body: parâmetros para criação e atualização de informações
+
+
+KNEX
+instalar KNEX
+terminal -> server:
+npm install knex
+
+SQLITE
+Instalar sqlite3
+terminal -> server:
+npm install sqlite3
+
+
+Tabela Pivot
+tabela n para n
+
+Migrations = histórico do bando de dados
+dentro de migrations, a ordem de criação dos arquivos é a ordem que será executado no banco
+
+Para poder criar a tabela dentro do banco, criar na raiz server o arquivo:
+knexfile.ts
+
+Para fazer as migrações:
+terminal -> server:
+npx knex migrate:latest --knexfile knexfile.ts migrate:latest
+
+Instalar a extensão no VSCode:
+SQLite
+
+MIGRAÇÃO:
+terminal -> server:
+npm run knex:migrate
+
+
+SEED:
+Serve para popular a base de dados
+terminal -> server:
+npm run knex:seed
+
+
+Arquivos estáticos são aqueles que vão ser acessíveis de forma direta, ex imagem, word, download..
+
+
+DELETE FROM items WHERE id=
+
+
+CORS 
+define na nossa API quais url web vão ter acesso a nossa api
+terminal -> server:
+npm install cors
+
+
+JSX: Sintaxe de XML dentro do JS
+
+COMPONENTE
+Todo componente deve inciar com letra maiúscula
+PROPRIEDADES
+São atributos que envia para o componente
+ESTADO
+Serve para armazenar uma informação dentro do componente. Sâo informações mantidas dentro do componente
+
+
+useState
+essa função sempre retorna um array
+
+Instalar um pacote de ícones do react:
+terminal -> web:
+npm install react-icons
+
+ROTAS
+terminal -> web:
+npm install react-router-dom
+
+MAPA
+instalar biblioteca para mapa
+terminal -> web:
+npm instal leaflet react-leaflet
+
+importar css do leaflet
+site > tutorials > guide
+colar no index.html do public
+
+terminal -> web:
+npm install @types/react-leaflet -D
+
+
+AXIOS
+Instalar biblioteca para poder fazer requsições para a API, o node
+terminal -> web:
+npm install axios
+
+com o axios consigo criar uma baseURL, em que posso definir um nome para pode usar em todas as requisições (como se fosse um sufixo)
+
+
+sempre que cria um estado pra um array ou um objeto, precisa informar manualmente o tipo da variável
+
+Interface serve pra fazer a represntação do formato que o objeto vai ter
+
+
+EXPO
+Instalar EXPO
+pasta raiz do projeto
+npm install -g expo-cli
+
+criar diretório mobile
+power shell -> adm
+terminal -> pasta raiz:
+expo init mobile
+selecionar a opção blank (Typescript)
+caso apareça algma pergunta para usar yarn, selecionar nao
+
+***RODAR O EXPO:
+terminal power shell adm -> mobile:
+npm start
+
+No React Native, todos os elementos tem o padrão display flex
+Não tem herança de estilos. Cada eletemento deve ter seu prórpio estilo
+Não pode retornar dois componentes ao mesmo tempo. Para fazer isso, incluir uma View ou fragment
+
+
+Instalar fontes:
+terminal -> mobile:
+expo install expo-font @expo-google-fonts/ubuntu @expo-google-fonts/roboto
+
+Qualquer alterção, executar de novo
+npm start
+
+Instalar REACT NAVIGATION
+https://reactnavigation.org/docs/getting-started
+terminal > mobile
+npm install @react-navigation/native
+
+instalar expo....
+expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
+
+Instalar outra lib:
+npm install @react-navigation/stack
+
+
+Instalar para permitir usar MAPA no react native
+terminal > mobile
+expo install react-native-maps
+
+Reiniciar o expo
+powershell admin > mobile
+npm start
+
+Importar CONSTANTS
+terminal > mobile
+expo install expo-constants
+
+instalar componente para para poder adicionar arquivos svg
+terminal > mobile
+expo install react-native-svg
+
+
+***ENDEREÇO EXPO
+expo possui um ENDEREÇO e o celular nao entende LOCALHOST
+sempre lembrar de alterar, porque o endereço no expo muda
+servidor > ItemsController e alterar localhost pelo endereço do EXPO, sem a porta
+mobile > api 
+
+reiniciar o servidor
+npm run dev
+
+uri: usado quando usa uma imagem externa
+
+instalar AXIOS:
+terminal > mobile:
+npm install axios
+
+
+react native permite que use um estilo com vários itens
+
+
+PACOTE DE GEOLOCALIZAÇÃO
+terminal > mobile:
+expo install expo-location
+
+
+sempre que a função recebe um parâmetro, deve-se usar arrow function
+
+
+Instalar expo mail composer
+terminal > mobile:
+expo install expo-mail-composer
+
+Reiniciar o expo
+
