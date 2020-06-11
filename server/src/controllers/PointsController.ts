@@ -24,8 +24,17 @@ class PointsController {
             .select('points.*');
             //buscar apenas todos os dados da tabela points
 
+        const serializedPoints = points.map(point => {
+        //map percorre todos os pontos que retornou do banco de dados
+            return {
+                ...point,
+                image_url: `http://192.168.15.8:3333/uploads/${point.image}`,
+            };
+        });
+        return response.json(serializedPoints);
+        
         //console.log(city, uf, items);
-        return response.json(points);
+        //return response.json(points);
     }
 
     async show(request: Request, response: Response) {
@@ -41,6 +50,12 @@ class PointsController {
             return response.status(400).json({ message: 'Point not found.'});
         }
 
+        const serializedPoint = {
+            //vai ter todos os dados do point
+            ...point,
+            image_url: `http://192.168.15.8:3333/uploads/${point.image}`,
+        };
+        
         //SELECT * FROM items
         //JOIN point_items ON items.id = point_items.item_id
         //WHERE point_items.point_id = {id}
@@ -53,7 +68,7 @@ class PointsController {
             .where('point_items.point_id', id)
             .select('items.title');
 
-        return response.json({ point, items });
+        return response.json({ point: serializedPoint, items });
         //vai retornar um objeto que vai retornar duas informações dentro do controller
     }
 
@@ -78,7 +93,7 @@ class PointsController {
 
         const point = {
             //short sintaxe: quando o nome da variável é igual ao da propriedade do objeto, pode omitir e usar somente um nome ao invés de name: name
-            image: 'https://images.unsplash.com/photo-1556767576-5ec41e3239ea?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=60',
+            image: request.file.filename,
             name,
             email,
             whatsapp,
@@ -93,16 +108,18 @@ class PointsController {
     
         const point_id = insertedIds[0];
     
-        const pointItems = items.map((item_id: number) => {
-        //items é um array de números
-        //pointItems vai usar a funçao map para percorrer em items, vai retornar cada id (item_id) e vai retornar um objeto contendo item_id e point_id
-            return {
-                item_id,
-                point_id,
-            };
-        })
+        const pointItems = items
+            .split(',')
+            .map((item: string) => Number(item.trim()))
+            .map((item_id: number) => {
+            //items é um array de números
+            //pointItems vai usar a funçao map para percorrer em items, vai retornar cada id (item_id) e vai retornar um objeto contendo item_id e point_id
+                return {
+                    item_id,
+                    point_id,
+                };
+            })
         
-    
         await trx('point_items').insert(pointItems);
     
         await trx.commit();

@@ -236,6 +236,7 @@ expo install react-native-svg
 expo possui um ENDEREÇO e o celular nao entende LOCALHOST
 sempre lembrar de alterar, porque o endereço no expo muda
 servidor > ItemsController e alterar localhost pelo endereço do EXPO, sem a porta
+servidor > PointsController
 mobile > api 
 
 reiniciar o servidor
@@ -265,3 +266,29 @@ expo install expo-mail-composer
 
 Reiniciar o expo
 
+
+MULTER
+Extensão/biblioteca para lidar com upload de imagens
+terminal > server:
+npm install multer
+
+instalar tipagem
+terminal > server:
+npm install @types/multer -D
+
+
+Serialização
+API Transform
+
+
+Reacr DROPZONE
+terminal > web
+npm install react-dropzone
+
+
+CELEBRATE
+terminal > server
+npm install celebrate
+
+Joi
+npm install @types/hapi__joi -D

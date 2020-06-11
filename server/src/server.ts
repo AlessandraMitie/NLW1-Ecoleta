@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import path from 'path';
 import routes from './routes';
+import { errors } from 'celebrate';
 
 const app = express();
 
@@ -66,6 +67,8 @@ app.use(routes);
 app.use('/uploads', express.static(path.resolve(__dirname, '..', 'uploads')));
 //primeiro parâmetro é a rota uploads
 //express.static é o segundo parâmetro e vai servir para servir arquivos estáticos de uma pasta específica
+
+app.use(errors());
 
 app.listen(3333);
 //3333 é a porta da aplicação
